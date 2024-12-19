@@ -46,7 +46,7 @@ const getSellInfo = async ({ jettons, jettonAddress, slippage }: { jettons: Deci
 }
 
 export const tonfunService = {
-  async getBuyJettonTxParams({ tonAmount, jettonAddress, userWalletAddress, slippage = defaultSlippage }: { jettonAddress: string; tonAmount: Decimal; slippage?: number; userWalletAddress: string }) {
+  async getBuy({ tonAmount, jettonAddress, slippage = defaultSlippage }: { jettonAddress: string; tonAmount: Decimal; slippage?: number; userWalletAddress: string }) {
     const buyInfo = await getBuyInfo({ tons: tonAmount, jettonAddress, slippage })
 
     const opts = {
@@ -58,7 +58,7 @@ export const tonfunService = {
     return (sender: Sender) => sdk.openCoin(Address.parse(jettonAddress)).sendBuy(sender, opts)
   },
 
-  async getSellJettonTxParams({ jettonAmount, jettonAddress, userWalletAddress, slippage = defaultSlippage }: { jettonAddress: string; jettonAmount: Decimal; slippage?: number; userWalletAddress: string }) {
+  async getSell({ jettonAmount, jettonAddress, userWalletAddress, slippage = defaultSlippage }: { jettonAddress: string; jettonAmount: Decimal; slippage?: number; userWalletAddress: string }) {
     const sellInfo = await getSellInfo({ jettons: jettonAmount, jettonAddress, slippage })
 
     const opts = {
